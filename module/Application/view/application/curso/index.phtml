@@ -1,0 +1,75 @@
+<div id="tituloPagina">Cursos cadastrados no sistema</div>
+<table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th style="text-align: left;">Descrição</th>
+			<th style="text-align: left;">Carga Horária</th>
+			<th style="text-align: left;">Tipo de curso</th>
+			<th width="90" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($cursos as $curso):?>
+		<tr>
+			<td id="descricao"><?php echo $this->escapeHtml($curso->getDescricao());?></td>
+			<td id="cargaHoraria"><?php echo $this->escapeHtml($curso->getCargaHoraria());?></td>
+			<td id="cursoTipo"><?php echo $this->escapeHtml($curso->getCursoTipo());?></td>
+			<td style="text-align: center"><a
+				href="/application/curso/save/id/<?php echo $curso->getId();?>"><span
+					title="Editar" class="ui-icon ui-icon-pencil" /></a> <a
+				href="/application/curso/delete/id/<?php echo $curso->getId();?>"
+				id="excluir"><span title="Excluir" class="ui-icon ui-icon-trash" /></a>
+		
+		</tr>
+		<?php endforeach;?>
+</table>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
+<div id="dialog-form" title="Confirmar exclusão">
+	<p id="texto" />
+</div>
+<script>
+$("#novo").button({
+	icons: {
+		primary: "ui-icon-plus",
+	},
+text: true,
+});
+$("#novo").click(function(e) {
+	e.preventDefault();
+	window.location ="/application/curso/save";
+});
+$("input[type=submit], a" ).button();
+$('#consulta').dataTable({
+	"bLengthChange": false,
+	"aaSorting": [[1, "asc"]],
+	"iDisplayLength": 17,
+ });
+$("a#excluir").on("click", function(e) {
+    e.preventDefault();
+    var link = $(this).attr('href');
+    var descricao = $(this).closest('tr').find('#descricao').text();
+    $("#texto").html("Deseja realmente excluir '"+descricao+"'?");
+    $("#dialog-form").data("link", link);
+    $("#dialog-form").dialog("open");
+});
+ $( "#dialog-form" ).dialog({
+		dialogClass: 'no-close',
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        height: 200,
+        width: 300,
+        modal: true,
+        buttons: {
+     		"Não": function() {
+         		$(this).dialog("close");
+         	},
+     		"Sim": function() {
+        		var link = $(this).data("link");
+            	window.location = link;
+           }
+	}
+});
+</script>

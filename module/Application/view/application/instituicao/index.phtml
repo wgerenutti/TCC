@@ -1,0 +1,85 @@
+﻿<div id="tituloPagina">
+Instituições cadastradas no sistema
+</div>
+<table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th style="text-align: left;">Razão Social</th>
+			<th style="text-align: left;">CNPJ</th>
+			<th style="text-align: left;">Localização</th>
+			<th style="text-align: left;">Telefone</th>
+			<th width="90" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($instituicoes as $instituicao):?>
+		<tr>
+			<td id="razaoSocial"><?php echo $this->escapeHtml($instituicao->getRazaoSocial());?></td>
+			<td id="cnpj"><?php echo $this->escapeHtml(substr($instituicao->getCnpj(),0,2).
+					".".substr($instituicao->getCnpj(),2,3).
+					".".substr($instituicao->getCnpj(),5,3).
+					"/".substr($instituicao->getCnpj(),8,4).
+					"-".substr($instituicao->getCnpj(),12,2));?></td>
+			<td id="localizacao"><?php echo $this->escapeHtml($instituicao->getLocalizacao())?></td>
+			<td id="telefone"><?php echo $this->escapeHtml (substr($instituicao->getTelefone(),0,0).
+			    "(".substr($instituicao->getTelefone(),0,2).  
+			    ")".substr($instituicao->getTelefone(),2,5).
+			    "-".substr($instituicao->getTelefone(),7,5));?></td>
+			<td style="text-align: center"><a
+				href="/application/instituicao/save/id/<?php echo $instituicao->getId();?>"><span
+					title="Editar" class="ui-icon ui-icon-pencil" /></a> <a
+				href="/application/instituicao/delete/id/<?php echo $instituicao->getId();?>"
+				id="excluir"><span title="Excluir" class="ui-icon ui-icon-trash" /></a>
+		</tr>
+<?php endforeach;?>
+</table>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
+<div id="dialog-form" title="Confirmar exclusão">
+	<p id="texto" />
+</div>
+<script>
+$("#novo").button({
+	icons: {
+		primary: "ui-icon-plus",
+	},
+text: true,
+});
+$("#novo").click(function(e) {
+	e.preventDefault();
+	window.location ="/application/instituicao/save";
+});
+$("input[type=submit], a" ).button();
+$('#consulta').dataTable({
+	"bLengthChange": false,
+	"aaSorting": [[1, "asc"]],
+	"iDisplayLength": 17,
+ });
+$("a#excluir").on("click", function(e) {
+    e.preventDefault();
+    var link = $(this).attr('href');
+    var razaoSocial = $(this).closest('tr').find('#razaoSocial').text();
+    $("#texto").html("Deseja realmente excluir '"+razaoSocial+"'?");
+    $("#dialog-form").data("link", link);
+    $("#dialog-form").dialog("open");
+});
+ $( "#dialog-form" ).dialog({
+		dialogClass: 'no-close',
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        height: 200,
+        width: 300,
+        modal: true,
+        buttons: {
+     		"Não": function() {
+         		$(this).dialog("close");
+         	},
+     		"Sim": function() {
+        		var link = $(this).data("link");
+            	window.location = link;
+           }
+	}
+});
+</script>

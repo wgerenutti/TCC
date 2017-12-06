@@ -1,0 +1,126 @@
+﻿<?php
+use Zend\Form\Element\Submit;
+?>
+<div id="tituloPagina">Cadastro de Empregado</div>
+<div id="tabs">
+	<ul>
+		<li><a href="#dados">Empregado</a></li>
+	</ul>
+	<div id="dados">
+<?php
+echo $this->form()->openTag($form);
+echo $this->formInput($form->get('matricula'));
+
+echo $this->formLabel($form->get('cpf')) . "<br />";
+echo $this->formInput($form->get('cpf')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('cpf')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('nome')) . "<br />";
+echo $this->formInput($form->get('nome')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('nome')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('admissao')) . "<br />";
+echo $this->formInput($form->get('admissao')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('admissao')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('cargo')) . "<br />";
+echo $this->formSelect($form->get('cargo')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('cargo')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('telefone')) . "<br />";
+echo $this->formInput($form->get('telefone')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('telefone')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('salario')) . "<br />";
+echo $this->formInput($form->get('salario')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('salario')) . "<descricao />";
+?></div><?php
+
+echo $this->formLabel($form->get('gerente')) . "<br />";
+echo $this->formSelect($form->get('gerente')) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors($form->get('gerente')) . "<descricao />";
+?></div><?php
+
+echo $this->formSubmit($form->get('submit')) . "<br />";
+echo $this->form()->closeTag();
+?>
+</div>
+</div>
+<div id="barraBotoes">
+	<button id="cancelar">Cancelar</button>
+	<button id="salvar">Salvar</button>
+</div>
+<script>
+$(document).ready(function(){
+	$('#salario').priceFormat({
+	    prefix: 'R$ ',
+        centsSeparator: ',',
+        thousandsSeparator: '.'
+});
+	$('#admissao').mask('00-00-0000');
+	$('#cpf').mask("999.999.999-99");
+	$('#telefone').setMask("(99) 9999-99999").ready(function(event) {
+	    var target, phone, element;
+	    target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+	    phone = target.value.replace(/\D/g, '');
+	    element = $(target);
+	    element.unsetMask();
+	    if(phone.length > 10) {
+	        element.setMask("(99) 99999-9999");
+	    } else {
+	        element.setMask("(99) 9999-9999");
+	    }
+	});
+	$("#admissao").datepicker({
+	    dateFormat: 'dd-mm-yy',
+	    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+	    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+	    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+	    nextText: 'Próximo',
+	    prevText: 'Anterior',			
+	    showOn : "button",
+		buttonImage : "/images/calendar.gif",
+		buttonImageOnly : true,
+		buttonText : "Selecione a data",
+		showOtherMonths : true,
+		selectOtherMonths : true,
+		DateFormat : ["mm-dd-yyyy"]
+});
+	$("#submit").hide();
+	$("#salvar").button({
+		icons: {
+			primary: "ui-icon-disk",
+		},
+	text: true,
+	});
+	$("#cancelar").button({
+		icons: {
+			primary: "ui-icon-close",
+		},
+	text: true,
+	});
+	$("#cancelar").click(function(e) {
+		e.preventDefault();
+		window.location ="/application/empregado";
+	});
+	$("#salvar").click(function(e) {
+		e.preventDefault();
+		$("#submit").click();
+	});
+});
+$("#tabs").tabs();
+</script>

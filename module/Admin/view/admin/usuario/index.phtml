@@ -1,0 +1,31 @@
+<label class="divisor"><span>Lista de Usuários</span></label>
+<div class="actions clearfix">
+	<div class="btns">
+		<a class="btn submit" href="/admin/usuario/save" title="Cadastrar Usuário">Cadastrar usuário..</a>
+	</div>
+</div><table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Login</th>
+			<th>E-mail</th>
+			<th>Ramal</th>
+			<th>Função</th>
+			<th width="120" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($users as $user):?>
+		<tr>
+			<td><?php echo $this->escapeHtml($user->nome);?></td>
+			<td><?php echo $this->escapeHtml($user->login);?></td>
+			<td><?php echo $this->escapeHtml($user->email);?></td>
+			<td><?php echo $this->escapeHtml($user->ramal);?></td>
+			<td><?php echo $this->escapeHtml($user->funcao);?></td>
+			<td class="center">
+				<a href="/admin/usuario/save/id/<?php echo $user->id ;?>" title="Editar" class="btn"><i class="icon-edit"></i></a>
+				<a href="/admin/usuario/delete/id/<?php echo $user->id;?>" rel="confirmation" title="Deseja excluir este registro?" class="btn"><i class="icon-remove"></i></a>
+			</td>
+		</tr>
+	<?php endforeach;?>
+</table>

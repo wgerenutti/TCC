@@ -1,0 +1,75 @@
+<div id="tituloPagina">
+	<h1>Conhecimentos cadastrados</h1>
+</div>
+
+
+<table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th style="text-align: left;">Titulo</th>
+			<th width="90" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php
+foreach ($conhecimentos as $conhecimento) :
+    ?>
+		<tr>
+			<td><?php echo $this->escapeHtml($conhecimento->getTitulo());?></td>
+			<td style="text-align: center"><a
+				href="/application/conhecimento/save/id/<?php echo $conhecimento->getId();?>"><span
+					title="Editar" class="ui-icon ui-icon-pencil" /></a> <a
+				href="/application/conhecimento/delete/id/<?php echo $conhecimento->getId();?>"
+				id="excluir"><span title="Excluir" class="ui-icon ui-icon-trash" /></a>
+			</td>
+		</tr>
+	<?php endforeach;?>
+
+</table>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
+<div id="dialog-form" title="Confirmar exclusão">
+	<p id="texto" />
+</div>
+
+<script>
+	$("#novo").button({
+		icons: {
+			primary: "ui-icon-plus",
+		},
+	text: true,
+	});
+	$("#novo").click(function(e) {
+		e.preventDefault();
+		window.location ="/application/conhecimento/save";
+	});
+    $("input[type=submit], a" ).button();
+    $("a#excluir").on("click", function(e) {
+        e.preventDefault();
+        var link = $(this).attr('href');
+        var nome = $(this).closest('tr').find('#titulo').text();
+        $("#texto").html("Deseja realmente excluir '"+nome+"'?");
+        $("#dialog-form").data("link", link);
+        $("#dialog-form").dialog("open");
+    });
+     $( "#dialog-form" ).dialog({
+		dialogClass: 'no-close',
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        height: 200,
+        width: 300,
+        modal: true,
+        buttons: {
+     		"Não": function() {
+         		$(this).dialog("close");
+         	},
+     		"Sim": function() {
+        		var link = $(this).data("link");
+            	window.location = link;
+           }
+	}
+    });
+   
+</script>

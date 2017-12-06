@@ -1,0 +1,81 @@
+<?php
+use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
+?>
+<div id="tituloPagina">Professores cadastrados no sistema</div>
+<table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th style="text-align: left;">Nome</th>
+			<th style="text-align: left;">Email</th>
+			<th style="text-align: left;">Telefone celular</th>
+			<th width="90" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($professores as $professor):?>
+		<tr>
+			<td id="nome"><?php echo $this->escapeHtml($professor->getNome());?></td>
+			<td><?php echo $this->escapeHtml($professor->getEmail());?></td>
+			<td id="telefone"><?php
+    echo $this->escapeHtml(substr($professor->getTelefone(), 0, 0) .
+    		"(" . substr($professor->getTelefone(), 0, 2) . ")" .
+    		substr($professor->getTelefone(), 2, 5) . "-" .
+    		substr($professor->getTelefone(), 7, 5));
+    ?></td>
+			<td style="text-align: center"><a
+				href="/application/professor/save/id/<?php echo $professor->getId();?>"><span
+					title="Editar" class="ui-icon ui-icon-pencil" /></a> <a
+				href="/application/professor/delete/id/<?php echo $professor->getId();?>"
+				id="excluir"><span title="Excluir" class="ui-icon ui-icon-trash" /></a>
+			</td>
+		</tr>
+	<?php endforeach;?>
+</table>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
+<div id="dialog-form" title="Confirmar exclusão">
+	<p id="texto" />
+</div>
+
+<script>
+	$("#novo").button({
+		icons: {
+			primary: "ui-icon-plus",
+		},
+	text: true,
+	});
+	$("#novo").click(function(e) {
+		e.preventDefault();
+		window.location ="/application/professor/save";
+	});
+	
+    $("input[type=submit], a" ).button();
+    $("a#excluir").on("click", function(e) {
+        e.preventDefault();
+        var link = $(this).attr('href');
+        var nome = $(this).closest('tr').find('#nome').text();
+        $("#texto").html("Deseja realmente excluir '"+nome+"'?");
+        $("#dialog-form").data("link", link);
+        $("#dialog-form").dialog("open");
+    });
+     $( "#dialog-form" ).dialog({
+		dialogClass: 'no-close',
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        height: 200,
+        width: 300,
+        modal: true,
+        buttons: {
+        		"Sim": function() {
+        		var link = $(this).data("link");
+            	window.location = link;
+         	  },
+     			"Não": function() {
+         		$(this).dialog("close");
+         	}
+	}
+    });
+   
+</script>

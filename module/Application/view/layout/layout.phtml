@@ -1,0 +1,106 @@
+﻿<?php echo $this->doctype(); ?>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+        <?php echo $this->headTitle('SIGEMP - '. $this->translate('Gestor de Empregados'))->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+        <!-- Le styles -->
+        <?php
+								echo $this->headLink ( array (
+										'rel' => 'shortcut icon',
+										'type' => 'image/vnd.microsoft.icon',
+										'href' => $this->basePath () . '/images/icone.ico' 
+								) )->prependStylesheet ( $this->basePath () . '/css/bootstrap-responsive.min.css' )->prependStylesheet ( $this->basePath () . '/css/style.css' )->prependStylesheet ( $this->basePath () . '/css/bootstrap.min.css' )->prependStylesheet ( $this->basePath () . '/css/jquery.dataTables.css' )->prependStylesheet ( $this->basePath () . '/css/jquery-ui.css' )?>
+        <!-- Scripts -->
+        <?php
+								echo $this->headScript ()->prependFile ( $this->basePath () . '/js/html5.js', 'text/javascript', array (
+										'conditional' => 'lt IE 9' 
+								) )->prependFile ( $this->basePath () . '/js/layout.js' )->prependFile ( $this->basePath () . '/js/meiomask.js' )->prependFile ( $this->basePath () . '/js/jquery-ui.js' )->prependFile ( $this->basePath () . '/js/jquery.js' );
+								?>
+    </head>
+<body>
+	<div class="navbar">
+		<!-- navbar-fixed-top -->
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Gestor de Empregados') ?></a>
+				<div class="nav-collapse"></div>
+			</div>
+		</div>
+	</div>
+				<?php
+				$user = $this->session ()->offsetGet ( 'user' );
+				?>
+				<div class="nav-collapse"></div>
+	<div class="fundo">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div id="leftcolumn">
+					<?php
+					if ($user) {
+						?>
+ 				<div id="logado">
+							<p>
+							<button id="sair"><a href="/admin/auth/logout">Sair do sistema</a></button>
+						</div>
+						<div id="accordion">
+							<h3>Cadastros</h3>
+							<div>
+								<ul id="menu">
+									<li><a href="/application/cargo/index">Cargo</a>
+									
+									<li><a href="/application/conhecimento/index">Conhecimento</a>
+									
+									<li><a href="/application/curso/index">Curso</a>
+									
+									<li><a href="/application/empregado/index">Empregado</a>
+									
+									<li><a href="/application/instituicao/index">Instituição</a>
+									
+									<li><a href="/application/professor/index">Professor</a>
+									
+									<li><a href="/application/setor/index">Setor</a>
+									
+									<li><a href="/application/turma/index">Turma</a>
+								
+								</ul>
+							</div>
+						</div>
+						<?php
+					} else {
+						if ($url != "/admin/auth/index") {
+							?>
+			<div id="logado">
+							<p style="color: red; font-weight: bold;">Sessão expirada. Clique
+								no botão abaixo para realizar login novamente:</p>
+						</div>
+							<h1><a href="/admin/auth/index">Entrar no sistema</a></h1>	
+												
+			<?php
+						}
+					}
+					?>
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="copyright">
+            			<?php echo $this->content; ?>
+            			<hr>
+					</div>
+				</div>
+				<!-- /container -->
+        <?php echo $this->inlineScript() ?>
+        </div>
+		</div>
+	</div>
+	<footer>
+		<div class="row">
+			<div class="col-md-12">
+				<p>&copy Todos direitos reservados</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

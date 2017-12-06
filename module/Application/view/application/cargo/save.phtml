@@ -1,0 +1,28 @@
+<?php
+use Zend\Form\Element\Submit;
+?>
+<div id="tituloPagina">Cadastro de Cargo</div>
+<div id="tabs">
+	<ul>
+		<li><a href="#dados">Cargo</a></li>
+	</ul>
+	<div id="dados">
+<?php
+echo $this->form ()->openTag ( $form );
+echo $this->formInput ( $form->get ( 'id' ) ) . "<br/>";
+
+echo $this->formLabel ( $form->get ( 'descricao' ) ) . "<br />";
+echo $this->formInput ( $form->get ( 'descricao' ) ) . "<br />";
+?><div style="width: 800px; font-size: 20px; color: red; height: 25px;"><?php
+echo $this->formElementErrors ( $form->get ( 'descricao' ) ) . "<descricao />";
+?></div><?php
+
+echo $this->formSubmit ( $form->get ( 'submit' ) ) . "<br />";
+echo $this->form ()->closeTag ();
+?>
+	</div>
+</div>
+<div id="barraBotoes">
+	<button id="cancelar">Cancelar</button>
+	<button id="salvar">Salvar</button>
+</div>

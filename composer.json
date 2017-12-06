@@ -1,0 +1,21 @@
+{
+       "name" : "zendframework/TCC",
+        "description" : "Trabalho de conclusão de Curso - SIGEMP",
+        "license" : "BSD-3-Clause",
+        "keywords" : [
+                "framework",
+                "zf2"
+        ],
+        "homepage" : "http://framework.zend.com/",
+        "minimum-stability" : "stable",
+        "require" : {
+                "php": ">=7.1",
+                "zendframework/zendframework" : "2.5.2",
+                "doctrine/doctrine-module" : "0.9",
+                "doctrine/doctrine-orm-module" : "0.9",
+                "zendframework/zend-mail" : "2.5.2"
+        },
+        "config" : {
+                "process-timeout" : 80000
+        }
+}

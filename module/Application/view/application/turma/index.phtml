@@ -1,0 +1,77 @@
+<div id="tituloPagina">
+	Turmas cadastradas no Sistema
+</div>
+<table class="hover" id="consulta">
+	<thead>
+		<tr>
+			<th style="text-align: left;">Nome da turma</th>
+			<th style="text-align: left;">Curso</th>
+			<th width="150" class="center">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+	<?php
+foreach ($turmas as $turma) :
+    ?>
+		<tr>
+			<td><?php echo $this->escapeHtml($turma->getNome());?></td>
+			<td><?php echo $this->escapeHtml($turma->getCurso()->getDescricao());?></td>
+			<td style="text-align: center"><a
+				href="/application/turma/save/id/<?php echo $turma->getId();?>"><span
+					title="Editar" class="ui-icon ui-icon-pencil"></span></a> <a
+				href="/application/turma/delete/id/<?php echo $turma->getId();?>"
+				id="excluir"><span title="Excluir" class="ui-icon ui-icon-trash"></span></a>
+			</td>
+		</tr>
+	<?php endforeach;?>
+	
+	
+
+</table>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
+<div id="dialog-form" title="Confirmar exclusão">
+	<p id="texto" />
+</div>
+<script>
+	$("#novo").button({
+		icons: {
+			primary: "ui-icon-plus",
+		},
+	text: true,
+	});
+	$("#novo").click(function(e) {
+		e.preventDefault();
+		window.location ="/application/turma/save";
+	});
+    $("input[type=submit], a" ).button();
+    $("a#excluir").on("click", function(e) {
+        e.preventDefault();
+        var link = $(this).attr('href');
+        var descricao = $(this).closest('tr').find('#descricao').text();
+        $("#texto").html("Deseja realmente excluir '"+descricao+"'?");
+        $("#dialog-form").data("link", link);
+        $("#dialog-form").dialog("open");
+    });
+     $( "#dialog-form" ).dialog({
+		dialogClass: 'no-close',
+        autoOpen: false,
+        resizable: false,
+        draggable: false,
+        height: 200,
+        width: 300,
+        modal: true,
+        buttons: {
+     		"Não": function() {
+         		$(this).dialog("close");
+         	},
+     		"Sim": function() {
+        		var link = $(this).data("link");
+            	window.location = link;
+           }
+	}
+    });
+   
+</script>
