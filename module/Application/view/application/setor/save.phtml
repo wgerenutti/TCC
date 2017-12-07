@@ -27,10 +27,40 @@ echo $this->formSubmit ( $form->get ( 'submit' ) ) . "<br />";
 ?>
 		<?php
 		echo $this->form ()->closeTag ();
-		?>		
+		?>	
+		<table id="listaEmpregado">
+			<thead>
+				<tr>
+					<th>Matrícula</th>
+					<th>Nome</th>
+					<th>Opções</th>
+				</tr>
+			
+			</thead>
+			<tbody>
+				<?php foreach ($this->empregados as $empregado):?>
+			<tr>
+					<td><input id="empregado" name="matricula[]"
+						value="<?php echo $empregado->getMatricula();?>" type="hidden"><?php echo $this->escapeHtml($empregado->getMatricula());?></td>
+					<td><?php echo $this->escapeHtml($empregado->getNome());?></td>
+					<td><button
+							id="excluirEmpregado_<?php echo $empregado->getMatricula();?>">Remover participante</button></td>
+				</tr>
+			<?php endforeach;?>		
+			</tbody>
+		</table>
+		<?php
+		
+echo $this->form ()->closeTag ();
+		?>
+		<button id="adicionarParticipantes">Adicionar Participantes</button>
 	</div>
 </div>
 <div id="barraBotoes">
 	<button id="cancelar">Cancelar</button>
 	<button id="salvar">Salvar</button>
+</div>
+<div id="modal-participantes" title="Adicionar Participantes"
+	class="ui-widget">
+	<div id="empregados"></div>
 </div>

@@ -1,6 +1,26 @@
-<br>
-<br>
+<div id="tabs">
+	<ul>
+		<li><a href="#dados">Login</a></li>
+	</ul>
+	<div id="dados">
+		<center>
 <?php
-echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
+echo $this->form ()->openTag ( $form );
+?>
+	<?php
+	echo $this->formLabel ( $form->get ( 'nome' ) );
+	echo $this->formInput ( $form->get ( 'nome' ) );
+	echo $this->formLabel ( $form->get ( 'senha' ) );
+	echo $this->formInput ( $form->get ( 'senha' ) );
+	?>
+<br>
+<?php 	echo $this->formInput($form->get('submit'));?>
+	<?php
+	echo $this->form ()->closeTag ();
+	?>
+	</center>
+	</div>
+</div>
+<script>
+$("#tabs").tabs();
+</script>

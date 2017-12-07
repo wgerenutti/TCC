@@ -2,6 +2,10 @@
 use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 ?>
 <div id="tituloPagina">Professores cadastrados no sistema</div>
+<br>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
 <table class="hover" id="consulta">
 	<thead>
 		<tr>
@@ -31,9 +35,6 @@ use Doctrine\ORM\Query\AST\Functions\SubstringFunction;
 		</tr>
 	<?php endforeach;?>
 </table>
-<div id="barraBotoes">
-	<button id="novo">Novo...</button>
-</div>
 <div id="dialog-form" title="Confirmar exclusão">
 	<p id="texto" />
 </div>

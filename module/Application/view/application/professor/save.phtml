@@ -54,19 +54,6 @@ echo $this->form()->closeTag();
 	$(document).ready(function(){
 	  $('#telefone').mask('(00)0000-00000');
 	});
-//	Fun��o para aceitar teclas e caracteres do campo nome
-// 	$('#nome').keypress(function (e) {
-// 		if(e.keyCode == 46 || e.keyCode == 9 || e.keyCode == 116){
-// 			return true;
-// 		}
-// 	  	var regex =  /^[a-zA-Z -()\b+]/;
-// 	    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
-// 	    if (regex.test(str)) {
-// 	        return true;
-// 	    }
-// 	    e.preventDefault();
-// 	    return false;
-// 	});	
 	$("#salvar").button({
 		icons: {
 			primary: "ui-icon-disk",

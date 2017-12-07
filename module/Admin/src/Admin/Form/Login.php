@@ -14,6 +14,8 @@ class Login extends Form
 		$this->add(array(
 			'name'       => 'nome',
 			'attributes' => array(
+					'id' => 'nome',
+					'required' => true,
                 'type'   => 'text',
 					'style' => 'width:200px',
 		),
@@ -25,6 +27,8 @@ class Login extends Form
 			'name'       => 'senha',
 			'attributes' => array(
                 'type'   => 'password',
+					'id' => 'senha',
+					'required' => true,
 					'style' => 'width:200px',
 		),
 			'options'    => array(

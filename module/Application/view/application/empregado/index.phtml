@@ -1,7 +1,9 @@
 ﻿<div id="tituloPagina">
 Empregados cadastrados no sistema
 </div>
-
+<br><div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
 <table class="hover" id="consulta">
 	<thead>
 		<tr>
@@ -32,9 +34,6 @@ echo $this->escapeHtml(substr($empregado->getCpf(), 0, 3) . "." . substr($empreg
 
 
 </table>
-<div id="barraBotoes">
-	<button id="novo">Novo...</button>
-</div>
 <div id="dialog-form" title="Confirmar exclusão">
 	<p id="texto" />
 </div>

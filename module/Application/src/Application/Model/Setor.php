@@ -36,6 +36,19 @@ class Setor extends Entity
      * @ORM\JoinColumn(name="gerente_id", referencedColumnName="matricula")
      */
     protected $gerente;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Empregado")
+     * @ORM\JoinTable(name="empregado_setor",
+     * joinColumns={@ORM\JoinColumn(name="setor_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="empregado_matricula", referencedColumnName="matricula")}
+     * )
+     */
+    protected $participantes;
+    public function __construct()
+    {
+    	$this->participantes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getId()
     {
@@ -46,7 +59,11 @@ class Setor extends Entity
     {
         return $this->nome;
     }
-
+    public function getParticipantes()
+    {
+    	return $this->participantes;
+    }
+    
     public function setId($id)
     {
         $this->id = $id;
@@ -65,6 +82,10 @@ class Setor extends Entity
     public function setNome($nome)
     {
         $this->nome = $nome;
+    }
+    public function setParticipantes($participantes)
+    {
+    	$this->participantes = $participantes;
     }
 
     public function getInputFilter()

@@ -1,8 +1,10 @@
 <div id="tituloPagina">
 	<h1>Conhecimentos cadastrados</h1>
 </div>
-
-
+<br>
+<div id="barraBotoes">
+	<button id="novo">Novo...</button>
+</div>
 <table class="hover" id="consulta">
 	<thead>
 		<tr>
@@ -12,8 +14,8 @@
 	</thead>
 	<tbody>
 	<?php
-foreach ($conhecimentos as $conhecimento) :
-    ?>
+	foreach ( $conhecimentos as $conhecimento ) :
+		?>
 		<tr>
 			<td><?php echo $this->escapeHtml($conhecimento->getTitulo());?></td>
 			<td style="text-align: center"><a
@@ -26,9 +28,6 @@ foreach ($conhecimentos as $conhecimento) :
 	<?php endforeach;?>
 
 </table>
-<div id="barraBotoes">
-	<button id="novo">Novo...</button>
-</div>
 <div id="dialog-form" title="Confirmar exclusão">
 	<p id="texto" />
 </div>

@@ -69,11 +69,14 @@ class SetorController extends ActionController {
 				$data = $form->getData ();
 				unset ( $data ['submit'] );
 				$matricula = $this->params ()->fromPost ( "gerente" );
+				$participantes = $this->params ()->fromPost ( 'participantes' );
 				if (isset ( $data ['id'] ) && $data ['id'] > 0) {
 					$setor = $this->getEntityManager ()->find ( 'Application\Model\Setor', $data ['id'] );
 				}
-				if (isset ( $data ['id'] ) && $data ['id'] > 0) {
-					$setor = $this->getEntityManager ()->find ( 'Application\Model\Setor', $data ['id'] );
+				$setor->getParticipantes ()->clear ();
+				foreach ( $participantes as $participanteId ) {
+					$participante = $this->getEntityManager ()->find ( "Application\Model\Empregado", $participanteId );
+					$setor->getParticipantes ()->add ( $participante );
 				}
 				$gerente = $this->getEntityManager ()->find ( 'Application\Model\Empregado', $matricula );
 				unset ( $data ['gerente'] );
@@ -90,12 +93,14 @@ class SetorController extends ActionController {
 			$setor = $this->getEntityManager ()->find ( 'Application\Model\Setor', $id );
 			$form->bind ( $setor );
 			$form->get ( 'submit' )->setAttribute ( 'value', 'Edit' );
+			$empregados = $setor->getParticipantes();
 		}
 		$renderer = $this->getServiceLocator ()->get ( 'Zend\View\Renderer\PhpRenderer' );
 		$renderer->headScript ()->appendFile ( '/js/jquery.dataTables.min.js' );
 		$renderer->headScript ()->appendFile ( '/js/setor.js' );
 		return new ViewModel ( array (
-				'form' => $form 
+				'form' => $form,
+				'empregados' => $empregados 
 		) );
 	}
 	
