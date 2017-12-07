@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 05, 2017 at 04:18 PM
+-- Generation Time: Dec 07, 2017 at 01:00 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.11
 
@@ -117,9 +117,9 @@ CREATE TABLE `empregado` (
   `matricula` int(11) NOT NULL,
   `nome` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `data_admissao` date NOT NULL,
-  `telefone` bigint(11) NOT NULL,
+  `telefone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `salario` decimal(10,2) NOT NULL,
-  `cpf` bigint(11) NOT NULL,
+  `cpf` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `gerente` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `cargo_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -129,16 +129,16 @@ CREATE TABLE `empregado` (
 --
 
 INSERT INTO `empregado` (`matricula`, `nome`, `data_admissao`, `telefone`, `salario`, `cpf`, `gerente`, `cargo_id`) VALUES
-(2, 'Juraci Barbosa', '1998-10-11', 43978637291, '7572.93', 4449299590, 'ativo', 1),
-(3, 'Thais Narumi Tanizaki', '2017-12-22', 43998026581, '50000.00', 10432169954, 'ativo', 9),
-(4, 'Isabelle Gomes', '2017-11-30', 32345453453, '1900.00', 83141414025, 'ativo', 11),
-(5, 'William Gerenutti', '2017-12-06', 83748738479, '4000.00', 84116918610, 'ativo', 9),
-(6, 'Daniela Soares', '2018-01-17', 45678965432, '980.00', 61781482160, 'inativo', 14),
-(7, 'Daniel Henrique', '2017-12-01', 4565656561, '5000.00', 58397047760, 'inativo', 5),
-(8, 'Henrique Camargo', '2017-12-02', 4654646532, '2000.00', 25522312092, 'inativo', 10),
-(9, 'Pablo Vittar', '2017-12-01', 34343434334, '1000.00', 25298061443, 'ativo', 18),
-(10, 'Selena Gomez', '2017-12-01', 929892929, '800.00', 94561772979, 'inativo', 4),
-(11, 'Demi Lovato', '2017-12-13', 4545353535, '2308.00', 93874284514, 'inativo', 11);
+(2, 'Juraci Barbosa', '1998-10-11', '43978637291', '7572.93', '4449299590', 'ativo', 1),
+(3, 'Thais Narumi Tanizaki', '2017-12-22', '43998026581', '50000.00', '10432169954', 'ativo', 9),
+(4, 'Isabelle Gomes', '2017-11-30', '32345453453', '1900.00', '83141414025', 'ativo', 11),
+(5, 'William Gerenutti', '2017-12-06', '83748738479', '4000.00', '84116918610', 'ativo', 9),
+(6, 'Daniela Soares', '2018-01-17', '45678965432', '980.00', '61781482160', 'inativo', 14),
+(7, 'Daniel Henrique', '2017-12-01', '4565656561', '5000.00', '58397047760', 'inativo', 5),
+(8, 'Henrique Camargo', '2017-12-02', '4654646532', '2000.00', '25522312092', 'inativo', 10),
+(9, 'Pablo Vittar', '2017-12-01', '34343434334', '1000.00', '25298061443', 'ativo', 18),
+(10, 'Selena Gomez', '2017-12-01', '929892929', '800.00', '94561772979', 'inativo', 4),
+(11, 'Demi Lovato', '2017-12-13', '4545353535', '2308.00', '93874284514', 'inativo', 11);
 
 -- --------------------------------------------------------
 
@@ -176,6 +176,17 @@ INSERT INTO `empregado_conhecimento` (`empregado_matricula`, `conhecimento_id`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `empregado_setor`
+--
+
+CREATE TABLE `empregado_setor` (
+  `empregado_matricula` int(11) NOT NULL,
+  `setor_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `empregado_turma`
 --
 
@@ -189,26 +200,10 @@ CREATE TABLE `empregado_turma` (
 --
 
 INSERT INTO `empregado_turma` (`empregado_matricula`, `turma_id`) VALUES
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(9, 1),
-(10, 1),
-(11, 1),
-(11, 3),
-(2, 2),
-(4, 2),
-(11, 2),
-(3, 1),
-(4, 1),
-(9, 1),
-(11, 1),
-(2, 2),
-(4, 3);
+(2, 4),
+(9, 4),
+(10, 4),
+(11, 4);
 
 -- --------------------------------------------------------
 
@@ -218,16 +213,13 @@ INSERT INTO `empregado_turma` (`empregado_matricula`, `turma_id`) VALUES
 
 CREATE TABLE `instituicao` (
   `id` int(11) NOT NULL,
-  `cnpj` bigint(11) NOT NULL,
+  `cnpj` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `razao_social` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `caixa_postal` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `endereco` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  `inscricao_estadual` int(9) NOT NULL,
-  `homepage` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `cep` int(11) NOT NULL,
   `bairro` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `telefone` bigint(11) NOT NULL,
+  `telefone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `localizacao` varchar(200) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -235,13 +227,13 @@ CREATE TABLE `instituicao` (
 -- Dumping data for table `instituicao`
 --
 
-INSERT INTO `instituicao` (`id`, `cnpj`, `razao_social`, `caixa_postal`, `email`, `endereco`, `inscricao_estadual`, `homepage`, `cep`, `bairro`, `telefone`, `localizacao`) VALUES
-(1, 60019633000173, 'Unopar', '', '', 'Rua Sao Luis 255', 0, '', 86828000, 'ShangrilÃ¡', 2873826332, 'Londrina'),
-(2, 53609184000158, 'Pitagoras', '54354353', '', 'Porto Alegre 34', 0, '', 73736382, 'Shimabokuro', 34354353534, 'Londrina - PR'),
-(3, 49789663000126, 'UTFPR', '', '', 'Rua Porto Alegre', 0, '', 34454455, 'Bairro 2', 3544345454, 'SÃ£o Paulo - SP'),
-(4, 22819808000138, 'UFAC - Universidade Federal do Acre', '', '', 'Rua 2', 0, '', 93847393, 'Porto Alegre', 2434342234, 'Acre - AC'),
-(5, 98641485000105, 'Universidade Estadual de Alagoas', '', '', 'Rua 3', 0, '', 34324243, 'Branco', 2345544332, 'Porto - AL'),
-(6, 15979636000102, 'UFAL', '34', '', 'Rua 7', 0, '', 35343231, 'Bela Vista', 23234324234, 'Londrina - PR');
+INSERT INTO `instituicao` (`id`, `cnpj`, `razao_social`, `email`, `endereco`, `cep`, `bairro`, `telefone`, `localizacao`) VALUES
+(1, '74657422000170', 'Unopar', '', 'Rua Sao Luis 255', 86828000, 'ShangrilÃ¡', '2873826332', 'Londrina'),
+(2, '53609184000', 'Pitagoras', '', 'Porto Alegre 34', 73736382, 'Shimabokuro', '34354353534', 'Londrina - PR'),
+(3, '49789663000', 'UTFPR', '', 'Rua Porto Alegre', 34454455, 'Bairro 2', '3544345454', 'SÃ£o Paulo - SP'),
+(4, '22819808000', 'UFAC - Universidade Federal do Acre', '', 'Rua 2', 93847393, 'Porto Alegre', '2434342234', 'Acre - AC'),
+(5, '98641485000', 'Universidade Estadual de Alagoas', '', 'Rua 3', 34324243, 'Branco', '2345544332', 'Porto - AL'),
+(6, '15979636000', 'UFAL', '', 'Rua 7', 35343231, 'Bela Vista', '23234324234', 'Londrina - PR');
 
 -- --------------------------------------------------------
 
@@ -252,7 +244,7 @@ INSERT INTO `instituicao` (`id`, `cnpj`, `razao_social`, `caixa_postal`, `email`
 CREATE TABLE `professor` (
   `id` int(11) NOT NULL,
   `nome` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `celular` bigint(11) NOT NULL,
+  `telefone` varchar(11) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(60) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -260,18 +252,18 @@ CREATE TABLE `professor` (
 -- Dumping data for table `professor`
 --
 
-INSERT INTO `professor` (`id`, `nome`, `celular`, `email`) VALUES
-(1, 'Paulo', 35435345454, 'paulo@gmail.com'),
-(2, 'Amanda', 39874389743, 'amanda@gmail.com'),
-(3, 'Pedro', 8777666665, 'pedro@gmail.com'),
-(4, 'Isabelle', 4983787842, 'isabelle@gmail.com'),
-(5, 'Bicalho', 2343434242, 'bicalho@gmail.com'),
-(7, 'Marcelo', 34534534534, 'marcelo@gmail.com'),
-(8, 'Airtom', 35534543543, 'airtom@gmail.com'),
-(9, 'Sandro', 44656456546, 'sandro@gmail.com'),
-(10, 'Monica', 4534353534, 'monica@gmail.com'),
-(11, 'Magali', 53453534543, 'magali@gmail.com'),
-(12, 'Sirio', 0, 'sirio@gmail.com');
+INSERT INTO `professor` (`id`, `nome`, `telefone`, `email`) VALUES
+(1, 'Paulo', '35435345454', 'paulo@gmail.com'),
+(2, 'Amanda', '39874389743', 'amanda@gmail.com'),
+(3, 'Pedro', '8777666665', 'pedro@gmail.com'),
+(4, 'Isabelle', '4983787842', 'isabelle@gmail.com'),
+(5, 'Bicalho', '2343434242', 'bicalho@gmail.com'),
+(7, 'Marcelo', '34534534534', 'marcelo@gmail.com'),
+(8, 'Airtom', '35534543543', 'airtom@gmail.com'),
+(9, 'Sandro', '44656456546', 'sandro@gmail.com'),
+(10, 'Monica', '4534353534', 'monica@gmail.com'),
+(11, 'Magali', '53453534543', 'magali@gmail.com'),
+(12, 'Sirio', '11111111111', 'sirio@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -281,19 +273,19 @@ INSERT INTO `professor` (`id`, `nome`, `celular`, `email`) VALUES
 
 CREATE TABLE `setor` (
   `id` int(11) NOT NULL,
-  `nome` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `empregado_matricula` int(11) NOT NULL
+  `nome` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `gerente_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `setor`
 --
 
-INSERT INTO `setor` (`id`, `nome`, `empregado_matricula`) VALUES
+INSERT INTO `setor` (`id`, `nome`, `gerente_id`) VALUES
 (5, 'Administrativo', 2),
 (7, 'Redes', 9),
 (8, 'Contabilidade', 4),
-(9, 'Recursos Humanos', 2);
+(9, 'Recursos Humanos', 4);
 
 -- --------------------------------------------------------
 
@@ -315,9 +307,7 @@ CREATE TABLE `turma` (
 --
 
 INSERT INTO `turma` (`id`, `nome`, `valor`, `aplicacao`, `curso_id`, `instituicao_id`) VALUES
-(1, 'Turma 1', '3000.00', 2, 1, 1),
-(2, 'Turma 2', '200.00', 3, 1, 3),
-(3, 'Turma 3', '90.00', 2, 2, 4);
+(4, 'Turma de porteiros', '1000.00', 1, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -335,12 +325,8 @@ CREATE TABLE `turma_professor` (
 --
 
 INSERT INTO `turma_professor` (`turma_id`, `professor_id`) VALUES
-(1, 1),
-(3, 2),
-(2, 4),
-(1, 1),
-(2, 1),
-(3, 3);
+(4, 7),
+(4, 2);
 
 -- --------------------------------------------------------
 
@@ -351,8 +337,8 @@ INSERT INTO `turma_professor` (`turma_id`, `professor_id`) VALUES
 CREATE TABLE `turma_programacao` (
   `id` int(11) NOT NULL,
   `data_realizacao` date NOT NULL,
-  `hora_inicial` varchar(5) COLLATE utf16_unicode_ci NOT NULL,
-  `hora_final` varchar(5) COLLATE utf16_unicode_ci NOT NULL,
+  `hora_inicial` time NOT NULL,
+  `hora_final` time NOT NULL,
   `local` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
   `turma_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
@@ -362,12 +348,9 @@ CREATE TABLE `turma_programacao` (
 --
 
 INSERT INTO `turma_programacao` (`id`, `data_realizacao`, `hora_inicial`, `hora_final`, `local`, `turma_id`) VALUES
-(1, '2017-12-05', '07:00', '15:00', 'Sala 1', 1),
-(2, '2017-12-01', '04:00', '09:00', 'Sala 2', 2),
-(3, '2017-12-26', '20:00', '21:00', 'Sala 4', 3),
-(4, '2017-12-12', '09:00', '15:00', 'Sala 1', 1),
-(5, '2017-12-14', '10:00', '11:00', 'Sala 2', 2),
-(6, '2017-12-12', '23:00', '00:00', 'Sala 5', 3);
+(7, '2017-12-04', '12:00:00', '17:00:00', 'LaboratÃ³rio 1', 4),
+(8, '2017-12-18', '15:00:00', '17:00:00', 'laboratÃ³rio 1', 4),
+(9, '2017-12-06', '15:00:00', '17:00:00', 'Computador', 4);
 
 -- --------------------------------------------------------
 
@@ -431,6 +414,13 @@ ALTER TABLE `empregado_conhecimento`
   ADD KEY `conhecimento_id2` (`conhecimento_id`);
 
 --
+-- Indexes for table `empregado_setor`
+--
+ALTER TABLE `empregado_setor`
+  ADD KEY `empregado_matricula` (`empregado_matricula`),
+  ADD KEY `setor_id` (`setor_id`);
+
+--
 -- Indexes for table `empregado_turma`
 --
 ALTER TABLE `empregado_turma`
@@ -454,7 +444,7 @@ ALTER TABLE `professor`
 --
 ALTER TABLE `setor`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `gerente_id` (`empregado_matricula`);
+  ADD KEY `gerente_id` (`gerente_id`);
 
 --
 -- Indexes for table `turma`
@@ -527,19 +517,19 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT for table `setor`
 --
 ALTER TABLE `setor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `turma`
 --
 ALTER TABLE `turma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `turma_programacao`
 --
 ALTER TABLE `turma_programacao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `usuario`
@@ -565,6 +555,13 @@ ALTER TABLE `empregado_conhecimento`
   ADD CONSTRAINT `empregado_matriula3` FOREIGN KEY (`empregado_matricula`) REFERENCES `empregado` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `empregado_setor`
+--
+ALTER TABLE `empregado_setor`
+  ADD CONSTRAINT `empregado_matricula6` FOREIGN KEY (`empregado_matricula`) REFERENCES `empregado` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `setor_id2` FOREIGN KEY (`setor_id`) REFERENCES `setor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `empregado_turma`
 --
 ALTER TABLE `empregado_turma`
@@ -575,7 +572,7 @@ ALTER TABLE `empregado_turma`
 -- Constraints for table `setor`
 --
 ALTER TABLE `setor`
-  ADD CONSTRAINT `gerente_id` FOREIGN KEY (`empregado_matricula`) REFERENCES `empregado` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `gerente_id` FOREIGN KEY (`gerente_id`) REFERENCES `empregado` (`matricula`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `turma_professor`
