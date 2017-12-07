@@ -53,8 +53,7 @@ class Empregado extends Entity {
 	protected $cpf;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="Cargo")
-	 * @ORM\JoinColumn(name="cargo_id", referencedColumnName="id")
+	 * @ORM\OneToMany(targetEntity="Cargo", mappedBy="empregado")
 	 */
 	protected $cargo;
 	/**

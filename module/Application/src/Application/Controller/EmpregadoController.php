@@ -6,6 +6,7 @@ use Core\Controller\ActionController;
 use Application\Model\Empregado;
 use Application\Form\Empregado as EmpregadoForm;
 use Doctrine\ORM\EntityManager;
+use Application\Model\EmpregadoCargo;
 
 /**
  * Controlador que gerencia os empregados
@@ -102,13 +103,10 @@ class EmpregadoController extends ActionController
                 $salario = $this->params()->fromPost('salario');
                 $telefone = preg_replace("/[^0-9]/", "", $this->params()->fromPost('telefone'));
                 $cpf = preg_replace('/[^0-9]/', '', $this->params()->fromPost("cpf"));
-                $cargoId = $this->params ()->fromPost ( 'cargo' );
-                $cargo = $this->getEntityManager ()->find ( 'Application\Model\Cargo', $cargoId );
                 unset($data['submit']);
                 unset($data['admissao']);
                 unset($data['salario']);
                 unset($data['telefone']);
-                unset($data['cargo']);
                 unset($data['cpf']);
                 if (isset($data['matricula']) && $data['matricula'] > 0) {
                     $empregado = $this->getEntityManager()->find('Application\Model\empregado', $data['matricula']);
@@ -120,7 +118,6 @@ class EmpregadoController extends ActionController
                 $empregado->setTelefone($telefone);
                 $empregado->setSalario($salario);
                 $empregado->setCpf($cpf);
-                $empregado->setCargo($cargo);
                 $this->getEntityManager()->persist($empregado);
                 $this->getEntityManager()->flush();
                 
