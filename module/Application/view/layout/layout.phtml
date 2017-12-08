@@ -18,7 +18,7 @@
 										'conditional' => 'lt IE 9' 
 								) )->prependFile ( $this->basePath () . '/js/layout.js' )->prependFile ( $this->basePath () . '/js/meiomask.js' )->prependFile ( $this->basePath () . '/js/jquery-ui.js' )->prependFile ( $this->basePath () . '/js/jquery.js' );
 								?>
-    </head>
+</head>
 <body>
 	<div class="navbar">
 		<!-- navbar-fixed-top -->
@@ -29,6 +29,7 @@
 			</div>
 		</div>
 	</div>
+	
 				<?php
 				$user = $this->session ()->offsetGet ( 'user' );
 				?>
@@ -36,63 +37,90 @@
 	<div class="fundo">
 		<div class="container">
 			<div class="row">
+			<?php
+			if ($user) {
+				?>				
+						<nav id="teste"
+						>
+						
+					<ul>
+						<li><a href="/application/cargo/index">Cargo</a></li>
+						<li><a href="/application/conhecimento/index">Conhecimento</a></li>
+						<li><a href="/application/curso/index">Curso</a></li>
+						<li><a href="/application/empregado/index">Empregado</a></li>
+						<li><a href="/application/instituicao/index">Instituição</a></li>
+						<li><a href="/application/professor/index">Professor</a></li>
+						<li><a href="/application/setor/index">Setor</a></li>
+						<li><a href="/application/turma/index">Turma</a></li>
+					</ul>
+				</nav>
 				<div class="col-md-4">
 					<div id="leftcolumn">
-					<?php
-					if ($user) {
-						?>
- 				<div id="logado">
-							<button id="sair"><a href="/admin/auth/logout">Sair do sistema</a></button>
+						<div id="logado">
+							<button id="sair">
+								<a href="/admin/auth/logout">Sair do sistema</a>
+							</button>
 						</div>
-						<div id="accordion">
-							<h3>Cadastros</h3>
-							<div>
-								<ul id="menu">
-									<li><a href="/application/cargo/index">Cargo</a>
-									
-									<li><a href="/application/conhecimento/index">Conhecimento</a>
-									
-									<li><a href="/application/curso/index">Curso</a>
-									
-									<li><a href="/application/empregado/index">Empregado</a>
-									
-									<li><a href="/application/instituicao/index">Instituição</a>
-									
-									<li><a href="/application/professor/index">Professor</a>
-									
-									<li><a href="/application/setor/index">Setor</a>
-									
-									<li><a href="/application/turma/index">Turma</a>
-								
-								</ul>
-							</div>
-						</div>
+
+						<!-- 						 						<div class="dropdown">  -->
+						<!-- 						 							<button class="btn btn-secondary dropdown-toggle" type="button"  -->
+						<!-- 						 								id="dropdownMenuButton" data-toggle="dropdown"  -->
+						<!-- 						 								aria-haspopup="true" aria-expanded="false">Menu de Cadastros</button>  -->
+						<!-- 						 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">  -->
+						<!-- 						 								<a class="dropdown-item" href="/application/cargo/index">Cargo</a> <a  -->
+						<!-- 						 									class="dropdown-item" href="/application/conhecimento/index">Conhecimento</a> <a  -->
+						<!-- 						 									class="dropdown-item" href="/application/curso/index">Curso</a> <a -->
+						<!-- 						 									class="dropdown-item" href="/application/empregado/index">Empregado</a> <a -->
+						<!-- 						 									class="dropdown-item" href="/application/instituicao/index">Instituição</a> <a  -->
+						<!-- 						 									class="dropdown-item" href="/application/professor/index">Professor</a> <a  -->
+						<!-- 						 									class="dropdown-item" href="/application/setor/index">setor</a> <a  -->
+						<!-- 						 									class="dropdown-item" href="/application/turma/index">Turma</a>  -->
+						<!-- 						 							</div>  -->
+						<!-- 						 						</div>  -->
+						<!-- 						<div id="accordion"> -->
+						<!-- 							<h3>Cadastros</h3> -->
+						<!-- 							<div> -->
+						<!-- 								<ul id="menu"> -->
+						<!-- 									<li><a href="/application/cargo/index">Cargo</a> -->
+						<!-- 									<li><a href="/application/conhecimento/index">Conhecimento</a> -->
+						<!-- 									<li><a href="/application/curso/index">Curso</a> -->
+						<!-- 									<li><a href="/application/empregado/index">Empregado</a> -->
+						<!-- 									<li><a href="/application/instituicao/index">Instituição</a> -->
+						<!-- 									<li><a href="/application/professor/index">Professor</a> -->
+						<!-- 									<li><a href="/application/setor/index">Setor</a> -->
+						<!-- 									<li><a href="/application/turma/index">Turma</a> -->
+						<!-- 								</ul> -->
+						<!-- 							</div> -->
+
+					</div> 
 						<?php
-					} else {
-						if ($url != "/admin/auth/index") {
-							?>
+			} else {
+				if ($url != "/admin/auth/index") {
+					?>
 			<div id="logado">
-							<p style="color: red; font-weight: bold;">Sessão expirada. Clique
-								no botão abaixo para realizar login novamente:</p>
-						</div>
-							<h1><a href="/admin/auth/index">Entrar no sistema</a></h1>	
+						<p style="color: red; font-weight: bold;">Sessão expirada. Clique
+							no botão abaixo para realizar login novamente:</p>
+					</div>
+					<h1>
+						<a href="/admin/auth/index">Entrar no sistema</a>
+					</h1>	
 												
 			<?php
-						}
-					}
-					?>
+				}
+			}
+			?>
 					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="copyright">
+			</div>
+			<div class="col-md-8">
+				<div class="copyright">
             			<?php echo $this->content; ?>
             			<hr>
-					</div>
 				</div>
-				<!-- /container -->
+			</div>
+			<!-- /container -->
         <?php echo $this->inlineScript() ?>
         </div>
-		</div>
+	</div>
 	</div>
 	<footer>
 		<div class="row">

@@ -29,6 +29,30 @@ p {
 	font-style: oblique;
 	font-weight: 900;
 }
+#teste ul {
+    padding:0px;
+    text-align: center;
+    margin:0px;
+    background-color:#EDEDED;
+    list-style:none;
+}
+#teste ul li { display: inline; }
+#teste ul li a {
+    padding: 2px 10px;
+    display: inline-block;
+
+    /* visual do link */
+    background-color:#EDEDED;
+    color: #333;
+    text-decoration: none;
+    border-bottom:3px solid #EDEDED;
+}
+#teste ul li a:hover {
+    background-color:#D6D6D6;
+    color: #6D6D6D;
+    border-bottom:3px solid #8FD1FA;
+}
+
 
 .navbar a.brand span {
 	color: #FFFFFF;

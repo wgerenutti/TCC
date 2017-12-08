@@ -11,7 +11,7 @@ use Admin\Form\Login;
  *
  * @category Admin
  * @package Controller
- * @author Paulo R. Silla<paulo.silla@embrapa.br>
+ * @author William Gerenutti <williamgerenuttidm@gmail.com>
  *        
  */
 class AuthController extends ActionController {

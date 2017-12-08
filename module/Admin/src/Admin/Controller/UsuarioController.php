@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityManager;
 *
 * @category Admin
 * @package Controller
-* @author Elton Minetto <eminetto@coderockr.com>
+* @author William Gerenutti <williamgerenuttidm@gmail.com>
 */
 class UsuarioController extends ActionController
 {

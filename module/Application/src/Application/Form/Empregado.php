@@ -116,28 +116,28 @@ class Empregado extends Form implements InputFilterProviderInterface {
 		) );
 		
 		$this->add ( array (
-				'name' => 'inicial',
+				'name' => 'dataFinal',
 				'attributes' => array (
-						'style' => 'width:100px',
+						'id' => 'dataFinal',
+						'style' => 'width:250px',
 						'type' => 'text',
-						'id' => 'inicial',
 						'required' => true 
 				),
 				'options' => array (
-						'label' => 'Data Inicial:*' 
+						'label' => 'Data de fim:*' 
 				) 
 		) );
 		
 		$this->add ( array (
-				'name' => 'final',
+				'name' => 'dataInicial',
 				'attributes' => array (
-						'style' => 'width:100px',
+						'id' => 'horaInicial',
+						'style' => 'width:250px',
 						'type' => 'text',
-						'id' => 'final',
 						'required' => true 
 				),
 				'options' => array (
-						'label' => 'Data Inicial:*' 
+						'label' => 'Data de inicio:*' 
 				) 
 		) );
 		

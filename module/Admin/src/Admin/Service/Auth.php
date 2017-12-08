@@ -11,7 +11,7 @@ use Zend\Authentication\Adapter\DbTable as AuthAdapterDbTable;
  *
  * @category Admin
  * @package Service
- * @author Paulo R. Silla <paulo.silla@embrapa.br>
+ * @author William Gerenutti <williamgerenuttidm@gmail.com>
  */
 class Auth extends Service {
 	

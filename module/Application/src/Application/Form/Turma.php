@@ -53,32 +53,6 @@ class Turma extends Form
         ));
         
         $this->add(array(
-            'name' => 'inicial',
-            'attributes' => array(
-                'style' => 'width:100px',
-                'type' => 'text',
-                'id' => 'inicial',
-                'required' => true
-            ),
-            'options' => array(
-                'label' => 'Data Inicial:*'
-            )
-        ));
-        
-        $this->add(array(
-            'name' => 'final',
-            'attributes' => array(
-                'style' => 'width:100px',
-                'type' => 'text',
-                'id' => 'final',
-                'required' => true
-            ),
-            'options' => array(
-                'label' => 'Data Final:*'
-            )
-        ));
-        
-        $this->add(array(
             'name' => 'valor',
             'attributes' => array(
                 'style' => 'width:780px',
